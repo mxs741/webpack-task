@@ -4,13 +4,16 @@ import pluginJs from "@eslint/js";
 
 export default [
   {
-    files: ["**/*.js"], languageOptions: {sourceType: "module"}
+    files: ["src/**/*.{ts,tsx,js,jsx}"],
+    languageOptions: {
+      sourceType: "module",
+      parser: "@typescript-eslint/parser",
+      parserOptions: {
+        project: "./tsconfig.json",
+        ecmaVersion: "latest",
+      },
+      globals: globals.browser,
+    },
+    ...pluginJs.configs.recommended,
   },
-  {
-    languageOptions: { globals: globals.browser }
-  },
-  {
-    ignores: ["webpack.config.dev.js", "webpack.config.prod.js"]
-  },
-  pluginJs.configs.recommended,
 ];
